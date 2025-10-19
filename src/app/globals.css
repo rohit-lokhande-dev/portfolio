@@ -1,26 +1,142 @@
 @import "tailwindcss";
 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@theme {
+  /* CSS Variables for Design System */
+  --color-background: oklch(0.18 0.02 248);
+  --color-foreground: oklch(0.96 0.01 248);
+  
+  --color-card: oklch(0.21 0.02 248);
+  --color-card-foreground: oklch(0.96 0.01 248);
+  
+  --color-popover: oklch(0.21 0.02 248);
+  --color-popover-foreground: oklch(0.96 0.01 248);
+  
+  --color-primary: oklch(0.70 0.15 198);
+  --color-primary-foreground: oklch(0.18 0.02 248);
+  
+  --color-secondary: oklch(0.72 0.20 288);
+  --color-secondary-foreground: oklch(0.96 0.01 248);
+  
+  --color-muted: oklch(0.35 0.02 248);
+  --color-muted-foreground: oklch(0.65 0.01 248);
+  
+  --color-accent: oklch(0.70 0.15 198);
+  --color-accent-foreground: oklch(0.18 0.02 248);
+  
+  --color-destructive: oklch(0.62 0.18 20);
+  --color-destructive-foreground: oklch(0.96 0.01 248);
+  
+  --color-border: oklch(0.35 0.02 248);
+  --color-input: oklch(0.35 0.02 248);
+  --color-ring: oklch(0.70 0.15 198);
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* HSL-based custom properties for gradients and effects */
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+
+  --card: 222 47% 8%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222 47% 8%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 189 94% 55%;
+  --primary-foreground: 222 47% 6%;
+
+  --secondary: 258 90% 66%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 189 94% 55%;
+  --accent-foreground: 222 47% 6%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 189 94% 55%;
+
+  --radius: 0.75rem;
+  
+  /* Custom gradients and effects */
+  --gradient-primary: linear-gradient(135deg, hsl(189, 94%, 55%), hsl(258, 90%, 66%));
+  --gradient-hero: linear-gradient(180deg, hsl(222, 47%, 6%) 0%, hsl(222, 47%, 10%) 100%);
+  --glow-cyan: 0 0 30px hsl(189 94% 55% / 0.3);
+  --glow-purple: 0 0 30px hsl(258 90% 66% / 0.3);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+
+  --card: 222 47% 8%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222 47% 8%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 189 94% 55%;
+  --primary-foreground: 222 47% 6%;
+
+  --secondary: 258 90% 66%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 189 94% 55%;
+  --accent-foreground: 222 47% 6%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 189 94% 55%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Utility classes for gradients and effects */
+.gradient-text {
+  background-image: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.glow-cyan {
+  box-shadow: var(--glow-cyan);
+}
+
+.glow-purple {
+  box-shadow: var(--glow-purple);
 }
