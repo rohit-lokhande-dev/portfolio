@@ -4,7 +4,15 @@ const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.hashnode.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   // Cloudflare Pages specific optimizations
   distDir: 'out',

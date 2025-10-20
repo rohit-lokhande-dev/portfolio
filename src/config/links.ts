@@ -25,13 +25,20 @@ export interface ProjectLink {
   blog?: string;
 }
 
-export interface BlogPost {
+export interface HashnodePost {
   id: string;
   title: string;
+  brief: string;
   url: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
+  publishedAt: string;
+  readTimeInMinutes: number;
+  coverImage: {
+    url: string;
+  };
+}
+
+export interface HashnodePostEdge {
+  node: HashnodePost;
 }
 
 export interface Project {
@@ -102,22 +109,28 @@ export const CONTACT_LINKS = [
 ];
 
 // Blog Posts
-export const BLOG_POSTS: BlogPost[] = [
+export const BLOG_POSTS: HashnodePost[] = [
   {
     id: "1",
     title: "Easy Ways to Set Up Your Own Deep Linking System",
     url: `${BASE_URLS.BLOG}/easy-ways-to-set-up-your-own-deep-linking-system`,
-    excerpt: "Gain complete control over your app's navigation by creating custom deep links for Android and iOS, eliminating the need for Firebase.",
-    date: "2025",
-    readTime: "6 min read"
+    brief: "Gain complete control over your app's navigation by creating custom deep links for Android and iOS, eliminating the need for Firebase.",
+    publishedAt: "2025",
+    readTimeInMinutes: 6,
+    coverImage: {
+      url: "https://blog.rohitlokhande.in/easy-ways-to-set-up-your-own-deep-linking-system/cover.jpg"
+    }
   },
   {
     id: "2",
     title: "Boosting LLM Performance with RAG",
     url: `${BASE_URLS.BLOG}/boosting-llm-performance-with-rag`,
-    excerpt: "Explore how Retrieval-Augmented Generation can enhance Large Language Models for more accurate and contextual responses.",
-    date: "2023",
-    readTime: "8 min read"
+    brief: "Explore how Retrieval-Augmented Generation can enhance Large Language Models for more accurate and contextual responses.",
+    publishedAt: "2023",
+    readTimeInMinutes: 8,
+    coverImage: {
+      url: "https://blog.rohitlokhande.in/boosting-llm-performance-with-rag/cover.jpg"
+    }
   }
 ];
 

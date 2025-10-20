@@ -5,7 +5,7 @@
  * In a real application, these functions would fetch data from APIs, databases, or CMS.
  */
 
-import { Project, BlogPost } from "@/config/links";
+import { Project, HashnodePost, HashnodePostEdge } from "@/config/links";
 
 // Example: Fetch projects from an API
 export async function getProjects(): Promise<Project[]> {
@@ -54,46 +54,84 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-// Example: Fetch blog posts from a CMS
-export async function getBlogPosts(): Promise<BlogPost[]> {
+// Fetch blog posts from Hashnode API
+export async function getBlogPosts(): Promise<HashnodePost[]> {
   try {
-    // In a real app, you would fetch from a CMS like Contentful, Strapi, etc.:
-    // const response = await fetch('https://api.contentful.com/spaces/YOUR_SPACE/entries', {
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-    //   },
-    // });
-    // const data = await response.json();
-    // return data.items.map(item => ({
-    //   title: item.fields.title,
-    //   url: `https://blog.rohitlokhande.in/${item.fields.slug}`,
-    //   excerpt: item.fields.excerpt,
-    //   date: item.fields.publishDate,
-    //   readTime: item.fields.readTime
-    // }));
+    const query = `
+      query {
+        publication(host: "blog.rohitlokhande.in") {
+          posts(first: 4) {
+            edges {
+              node {
+                id
+                title
+                brief
+                url
+                publishedAt
+                readTimeInMinutes
+                coverImage {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
 
-    // For now, return static data
+    const response = await fetch('https://gql.hashnode.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    
+    if (!result?.data?.publication?.posts?.edges) {
+      throw new Error('No posts found from Hashnode API');
+    }
+
+    // Transform Hashnode data to match our HashnodePost interface
+    const blogPosts: HashnodePost[] = result.data.publication.posts.edges.map((edge: HashnodePostEdge) => {
+      const post = edge.node;
+      return post;
+    });
+
+    return blogPosts;
+  } catch (error) {
+    console.error('Error fetching blog posts from Hashnode:', error);
+    
+    // Return fallback static data if API fails
     return [
       {
         id: "1",
         title: "Easy Ways to Set Up Your Own Deep Linking System",
         url: "https://blog.rohitlokhande.in/easy-ways-to-set-up-your-own-deep-linking-system",
-        excerpt: "Gain complete control over your app's navigation by creating custom deep links for Android and iOS, eliminating the need for Firebase.",
-        date: "2025",
-        readTime: "6 min read"
+        brief: "Gain complete control over your app's navigation by creating custom deep links for Android and iOS, eliminating the need for Firebase.",
+        publishedAt: "2025",
+        readTimeInMinutes: 6,
+        coverImage: {
+          url: "https://blog.rohitlokhande.in/easy-ways-to-set-up-your-own-deep-linking-system/cover.jpg"
+        }
       },
       {
         id: "2",
         title: "Boosting LLM Performance with RAG",
         url: "https://blog.rohitlokhande.in/boosting-llm-performance-with-rag",
-        excerpt: "Explore how Retrieval-Augmented Generation can enhance Large Language Models for more accurate and contextual responses.",
-        date: "2023",
-        readTime: "8 min read"
+        brief: "Explore how Retrieval-Augmented Generation can enhance Large Language Models for more accurate and contextual responses.",
+        publishedAt: "2023",
+        readTimeInMinutes: 8,
+        coverImage: {
+          url: "https://blog.rohitlokhande.in/boosting-llm-performance-with-rag/cover.jpg"
+        }
       }
     ];
-  } catch (error) {
-    console.error('Error fetching blog posts:', error);
-    return [];
   }
 }
 
