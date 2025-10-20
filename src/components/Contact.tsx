@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Github, Linkedin, ExternalLink } from "lucide-react";
+import { Mail, Github, Linkedin, ExternalLink, FileText } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { CONTACT_LINKS, getEmailLink, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 
@@ -11,7 +11,10 @@ const Contact = () => {
   // Map contact links with icons
   const contactLinks = CONTACT_LINKS.map(link => ({
     ...link,
-    icon: link.name === 'github' ? Github : link.name === 'linkedin' ? Linkedin : ExternalLink
+    icon: link.name === 'github' ? Github : 
+          link.name === 'linkedin' ? Linkedin : 
+          link.name === 'resume' ? FileText : 
+          ExternalLink
   }));
 
   return (

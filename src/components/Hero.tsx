@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, FileText } from "lucide-react";
 import Image from "next/image";
-import { SOCIAL_LINKS, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
+import { SOCIAL_LINKS, EXTERNAL_LINK_ATTRIBUTES, BASE_URLS } from "@/config/links";
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -36,6 +36,12 @@ const Hero = () => {
             <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan">
               <a href="#contact" className="flex items-center gap-2">
                 Get in Touch <Mail className="w-4 h-4" />
+              </a>
+            </Button>
+            
+            <Button size="lg" variant="outline" className="gap-2 border-primary/30 hover:bg-primary/10">
+              <a href={BASE_URLS.RESUME} {...EXTERNAL_LINK_ATTRIBUTES} className="flex items-center gap-2">
+                Download Resume <FileText className="w-4 h-4" />
               </a>
             </Button>
             

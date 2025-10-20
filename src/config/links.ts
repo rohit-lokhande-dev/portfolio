@@ -59,6 +59,7 @@ export const BASE_URLS = {
   LINKEDIN: 'https://linkedin.rohitlokhande.in',
   BLOG: 'https://blog.rohitlokhande.in',
   EMAIL: 'rohitlokhande6293@gmail.com',
+  RESUME: 'https://drive.google.com/file/d/1appcUjujCDsOPdHzIe4uxNMNhZ1NEcrv/view?usp=share_link',
 } as const;
 
 // Social Media Links
@@ -105,6 +106,13 @@ export const CONTACT_LINKS = [
     label: 'Blog',
     value: 'blog.rohitlokhande.in',
     color: 'hover:text-primary'
+  },
+  {
+    name: 'resume',
+    url: BASE_URLS.RESUME,
+    label: 'Resume',
+    value: 'Download PDF',
+    color: 'hover:text-[#FF6B6B]'
   }
 ];
 

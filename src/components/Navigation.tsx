@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import Image from "next/image";
+import { BASE_URLS, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,6 +59,12 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
+            <Button size="sm" variant="outline" className="gap-2 border-primary/30 hover:bg-primary/10">
+              <a href={BASE_URLS.RESUME} {...EXTERNAL_LINK_ATTRIBUTES} className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Resume
+              </a>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,6 +92,14 @@ const Navigation = () => {
                   {item.label}
                 </a>
               ))}
+              <div className="px-4 py-2">
+                <Button size="sm" variant="outline" className="gap-2 border-primary/30 hover:bg-primary/10 w-full">
+                  <a href={BASE_URLS.RESUME} {...EXTERNAL_LINK_ATTRIBUTES} className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+                    <FileText className="w-4 h-4" />
+                    Resume
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         )}
