@@ -1,4 +1,4 @@
-import { Github, Linkedin, ExternalLink } from "lucide-react";
+import { Github, Linkedin, ExternalLink, Twitter } from "lucide-react";
 import { SOCIAL_LINKS, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 
 const Footer = () => {
@@ -19,6 +19,8 @@ const Footer = () => {
                   ? Github
                   : social.name === "linkedin"
                   ? Linkedin
+                  : social.name === "twitter"
+                  ? Twitter
                   : ExternalLink;
 
               return (

@@ -60,6 +60,7 @@ export const BASE_URLS = {
   BLOG: 'https://blog.rohitlokhande.in',
   EMAIL: 'rohitlokhande6293@gmail.com',
   RESUME: 'https://drive.google.com/file/d/1appcUjujCDsOPdHzIe4uxNMNhZ1NEcrv/view?usp=share_link',
+  TWITTER: 'https://x.com/rohit_2301',
 } as const;
 
 // Social Media Links
@@ -75,6 +76,12 @@ export const SOCIAL_LINKS: SocialLink[] = [
     url: BASE_URLS.LINKEDIN,
     label: 'LinkedIn Profile',
     color: 'hover:text-[#0077B5]'
+  },
+  {
+    name: 'twitter',
+    url: BASE_URLS.TWITTER,
+    label: 'Twitter Profile',
+    color: 'hover:text-[#1DA1F2]'
   },
   {
     name: 'blog',
@@ -99,6 +106,13 @@ export const CONTACT_LINKS = [
     label: 'LinkedIn',
     value: 'rohit-lokhande',
     color: 'hover:text-[#0077B5]'
+  },
+  {
+    name: 'twitter',
+    url: BASE_URLS.TWITTER,
+    label: 'Twitter',
+    value: '@rohit_2301',
+    color: 'hover:text-[#1DA1F2]'
   },
   {
     name: 'blog',

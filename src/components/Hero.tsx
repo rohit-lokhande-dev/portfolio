@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ExternalLink, FileText } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, FileText, Twitter } from "lucide-react";
 import Image from "next/image";
 import { SOCIAL_LINKS, EXTERNAL_LINK_ATTRIBUTES, BASE_URLS } from "@/config/links";
 const Hero = () => {
@@ -56,6 +56,7 @@ const Hero = () => {
             {SOCIAL_LINKS.map((social, index) => {
               const IconComponent = social.name === 'github' ? Github : 
                                   social.name === 'linkedin' ? Linkedin : 
+                                  social.name === 'twitter' ? Twitter :
                                   ExternalLink;
               
               return (

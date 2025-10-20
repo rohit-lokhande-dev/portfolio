@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Github, Linkedin, ExternalLink, FileText } from "lucide-react";
+import { Mail, Github, Linkedin, ExternalLink, FileText, Twitter } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { CONTACT_LINKS, getEmailLink, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 
@@ -13,6 +13,7 @@ const Contact = () => {
     ...link,
     icon: link.name === 'github' ? Github : 
           link.name === 'linkedin' ? Linkedin : 
+          link.name === 'twitter' ? Twitter :
           link.name === 'resume' ? FileText : 
           ExternalLink
   }));
