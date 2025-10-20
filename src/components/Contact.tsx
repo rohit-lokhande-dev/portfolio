@@ -1,33 +1,18 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Github, Linkedin, ExternalLink } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { CONTACT_LINKS, getEmailLink, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 
 const Contact = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const contactLinks = [
-    {
-      icon: Github,
-      label: "GitHub",
-      value: "@rohit-lokhande-dev",
-      link: "https://github.com/rohit-lokhande-dev",
-      color: "hover:text-foreground"
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "rohit-lokhande",
-      link: "https://linkedin.com/in/rohit-lokhande-3b15ab181",
-      color: "hover:text-[#0077B5]"
-    },
-    {
-      icon: ExternalLink,
-      label: "Blog",
-      value: "blog.rohitlokhande.in",
-      link: "https://blog.rohitlokhande.in",
-      color: "hover:text-primary"
-    }
-  ];
+  
+  // Map contact links with icons
+  const contactLinks = CONTACT_LINKS.map(link => ({
+    ...link,
+    icon: link.name === 'github' ? Github : link.name === 'linkedin' ? Linkedin : ExternalLink
+  }));
 
   return (
     <section id="contact" className="py-24 px-4">
@@ -52,10 +37,10 @@ const Contact = () => {
             {contactLinks.map((contact, index) => (
               <a
                 key={index}
-                href={contact.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={contact.url}
+                {...EXTERNAL_LINK_ATTRIBUTES}
                 className={`flex items-center gap-4 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-all duration-300 hover:translate-x-2 group ${contact.color}`}
+                aria-label={contact.label}
               >
                 <div className="p-3 rounded-full bg-background">
                   <contact.icon className="w-5 h-5" />
@@ -74,7 +59,7 @@ const Contact = () => {
             className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan"
             asChild
           >
-            <a href="mailto:rohit@example.com">
+            <a href={getEmailLink()}>
               <Mail className="w-5 h-5" />
               Send Email
             </a>

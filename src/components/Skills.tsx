@@ -1,29 +1,39 @@
+'use client';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
-const Skills = () => {
+interface SkillsData {
+  frontend: string[];
+  backend: string[];
+  cloud: string[];
+  tools: string[];
+}
+
+interface SkillsProps {
+  skills: SkillsData | null;
+}
+
+const Skills = ({ skills }: SkillsProps) => {
   const { ref, isVisible } = useScrollAnimation();
+  
+  // Use dynamic skills data or fallback to static data
   const skillCategories = [
     {
       title: "Frontend",
-      skills: ["React.js", "Next.js", "React Native", "Flutter", "Redux", "React Query", "Tailwind CSS"]
+      skills: skills?.frontend || ["React.js", "Next.js", "React Native", "Flutter", "Redux", "React Query", "Tailwind CSS"]
     },
     {
       title: "Backend",
-      skills: ["Node.js", "Express.js", "Socket.io", "REST APIs", "GraphQL"]
+      skills: skills?.backend || ["Node.js", "Express.js", "Socket.io", "REST APIs", "GraphQL"]
     },
     {
-      title: "Databases",
-      skills: ["PostgreSQL", "MySQL", "Firebase", "MongoDB"]
-    },
-    {
-      title: "DevOps & Cloud",
-      skills: ["Docker", "AWS", "Cloudflare", "GitHub Actions", "GitLab CI", "Nginx"]
+      title: "Cloud & DevOps",
+      skills: skills?.cloud || ["Docker", "AWS", "Cloudflare", "GitHub Actions", "GitLab CI", "Nginx"]
     },
     {
       title: "Tools & Others",
-      skills: ["Git", "Jira", "NPM", "CI/CD", "Microservices"]
+      skills: skills?.tools || ["Git", "Jira", "NPM", "CI/CD", "Microservices"]
     }
   ];
 

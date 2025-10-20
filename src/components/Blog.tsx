@@ -1,26 +1,17 @@
+'use client';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { BASE_URLS, EXTERNAL_LINK_ATTRIBUTES, BlogPost } from "@/config/links";
 
-const Blog = () => {
+interface BlogProps {
+  blogPosts: BlogPost[];
+}
+
+const Blog = ({ blogPosts }: BlogProps) => {
   const { ref, isVisible } = useScrollAnimation();
-  const posts = [
-    {
-      title: "Easy Ways to Set Up Your Own Deep Linking System",
-      excerpt: "Gain complete control over your app's navigation by creating custom deep links for Android and iOS, eliminating the need for Firebase.",
-      date: "2025",
-      readTime: "6 min read",
-      link: "https://blog.rohitlokhande.in/easy-ways-to-set-up-your-own-deep-linking-system"
-    },
-    {
-      title: "Boosting LLM Performance with RAG",
-      excerpt: "Explore how Retrieval-Augmented Generation can enhance Large Language Models for more accurate and contextual responses.",
-      date: "2023",
-      readTime: "8 min read",
-      link: "https://blog.rohitlokhande.in/boosting-llm-performance-with-rag"
-    }
-  ];
+  const posts = blogPosts;
 
   return (
     <section id="blog" className="py-24 px-4 bg-card/30">
@@ -63,7 +54,7 @@ const Blog = () => {
                 className="gap-2 border-primary/30 hover:bg-primary/10 w-full"
                 asChild
               >
-                <a href={post.link} target="_blank" rel="noopener noreferrer">
+                <a href={post.url} {...EXTERNAL_LINK_ATTRIBUTES}>
                   Read Article <ExternalLink className="w-4 h-4" />
                 </a>
               </Button>
@@ -78,7 +69,7 @@ const Blog = () => {
             className="gap-2 border-primary/30 hover:bg-primary/10"
             asChild
           >
-            <a href="https://blog.rohitlokhande.in" target="_blank" rel="noopener noreferrer">
+            <a href={BASE_URLS.BLOG} {...EXTERNAL_LINK_ATTRIBUTES}>
               <ExternalLink className="w-5 h-5" />
               Visit Blog
             </a>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { SOCIAL_LINKS, EXTERNAL_LINK_ATTRIBUTES } from "@/config/links";
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -46,33 +47,23 @@ const Hero = () => {
           </div>
           
           <div className="flex gap-4 justify-center pt-8">
-            <a 
-              href="https://github.com/rohit-lokhande-dev" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="GitHub Profile"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a 
-              href="https://linkedin.com/in/rohit-lokhande-3b15ab181" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a 
-              href="https://blog.rohitlokhande.in" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="Blog"
-            >
-              <ExternalLink className="w-5 h-5" />
-            </a>
+            {SOCIAL_LINKS.map((social, index) => {
+              const IconComponent = social.name === 'github' ? Github : 
+                                  social.name === 'linkedin' ? Linkedin : 
+                                  ExternalLink;
+              
+              return (
+                <a 
+                  key={index}
+                  href={social.url} 
+                  {...EXTERNAL_LINK_ATTRIBUTES}
+                  className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <IconComponent className="w-5 h-5" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

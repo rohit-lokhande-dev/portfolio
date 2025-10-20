@@ -1,8 +1,21 @@
+'use client';
 import { Card } from "@/components/ui/card";
 import { Code2, Rocket, Database } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
-const About = () => {
+interface UserProfile {
+  name: string;
+  title: string;
+  experience: string;
+  location: string;
+  bio: string;
+}
+
+interface AboutProps {
+  userProfile: UserProfile | null;
+}
+
+const About = ({ userProfile }: AboutProps) => {
   const { ref, isVisible } = useScrollAnimation();
   const highlights = [
     {
@@ -37,13 +50,13 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className={`space-y-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <p className="text-lg leading-relaxed text-foreground/90">
-              👋 Hi, I&apos;m <span className="text-primary font-semibold">Rohit Lokhande</span> — a Software Engineer with <span className="text-primary font-semibold">2+ years of experience</span> building scalable web and mobile applications using React.js, Node.js, and cloud technologies.
+              👋 Hi, I&apos;m <span className="text-primary font-semibold">{userProfile?.name || 'Rohit Lokhande'}</span> — a {userProfile?.title || 'Software Engineer'} with <span className="text-primary font-semibold">{userProfile?.experience || '2+ years of experience'}</span> building scalable web and mobile apps using React.js, Node.js, and cloud technologies.
             </p>
             <p className="text-lg leading-relaxed text-foreground/90">
               💡 I enjoy designing clean architectures, crafting efficient APIs, and exploring Docker, CI/CD, and AWS for reliable deployments.
             </p>
             <p className="text-lg leading-relaxed text-foreground/90">
-              🚀 Currently working on <span className="text-secondary font-semibold">Backend-focused projects</span> and sharing learnings through blogs and open-source contributions.
+              🚀 {userProfile?.bio || 'Passionate Full Stack Developer focused on building end-to-end solutions, optimizing performance, and contributing to innovative projects and open-source communities.'}
             </p>
           </div>
 
